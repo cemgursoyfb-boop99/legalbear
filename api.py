@@ -17,16 +17,14 @@ from templates import (
 )
 KVKK_QA_PATH = os.path.join(os.path.dirname(__file__), "knowledge", "data", "kvkk_data.json")
 
-app = FastAPI()
+# FastAPI uygulaması ve frontend bağlantısı
+app = FastAPI(title="legalbear API", description="KVKK & GDPR metin analiz ve şablon API'si", version="1.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"]
 )
-
-# FastAPI uygulaması ve frontend bağlantısı
-app = FastAPI(title="legalbear API", description="KVKK & GDPR metin analiz ve şablon API'si", version="1.0")
 
 templates = Jinja2Templates(directory="frontend")
 
