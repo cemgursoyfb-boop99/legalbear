@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>legalbear</title>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sol Panel: Modül Listesi -->
+    <div class="sidebar">
+    <div class="logo-container" style="display:flex; align-items:center; padding:10px; justify-content: space-between;">
+  <img src="/static/legalbear.png" class="logo-img" alt="Bearr" />
+</div>
+      <ul>
+        <li><button onclick="loadModule('intro')">legalbear nedir?</button></li>
+        <li><button onclick="loadModule('kvkk-qa')">KVKK Arama Motoru</button></li>
+        <li><button onclick="loadModule('kvkk-risk')">KVKK Risk Analizi</button></li>
+        <li><button onclick="loadModule('visitor-info')">Ziyaretçi Aydınlatma Metni</button></li>
+        <li><button onclick="loadModule('kvkk-consent')">KVKK Açık Rıza Metni</button></li>
+        <li><button onclick="loadModule('kvkk-info')">KVKK Bilgilendirme Metni</button></li>
+        <li><button onclick="loadModule('gdpr-consent')">GDPR Açık Rıza Metni</button></li>
+      </ul>
+    </div>
+
+    <!-- Sağ Panel: İçerik Alanı -->
+    <div class="main" id="content-area">
+      <h1>legalbear nedir?</h1>
+      <p><strong>legalbear</strong>, kişisel veri koruma süreçlerini kolaylaştırmak için geliştirilmiş açık kaynaklı bir hukuk asistanıdır.</p>
+      <ul>
+        <li>KVKK ve GDPR kapsamında veri analizi yapar</li>
+        <li>Şablon metinler üretir</li>
+        <li>Yasal soruları yanıtlar</li>
+        <li>Akademik ve açık kaynak toplulukları için tasarlanmıştır</li>
+        <li>Hedefi: veri koruma süreçlerini herkes için erişilebilir ve anlaşılır hale getirmek</li>
+      </ul>
+      <p>legalbear, teknik kullanıcılar kadar hukukçular ve veri sorumluları için de sade bir arayüz sunar. Modüler yapısı sayesinde farklı senaryolara uyarlanabilir. Açık kaynak olması, topluluk katkılarını teşvik eder ve sürekli gelişmesini sağlar.</p>
+      <p>İster KVKK bilgilendirme metni üretmek isteyin, ister GDPR açık rıza metni hazırlayın; legalbear sizin için hızlı, doğru ve yasal uyumlu içerikler sunar.</p>
+    </div>
+  </div>
+<script src="/static/script.js"></script>
+
+</body>
+</html>
+
+<style>
+
+.logo-img {
+  height: 50px;
+  width: 160px;
+  border-radius: 6px;
+  object-fit: fill;
+  border: 3px solid #ffffff;
+}
+
+
+body {
+  font-family: "Calibri Light", "Calibri", "Segoe UI", sans-serif;
+  background-color: #0b1c3f;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  flex: 0 0 30%;
+  background-color: #0d006d;
+  padding: 30px;
+  box-sizing: border-box;
+  border-right: 2px solid #ccc;
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 15px;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 12px;
+  background-color: #fff700;
+  color: rgb(39, 0, 210);
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background-color: hsl(0, 0%, 90%);
+}
+
+.main {
+  flex: 0 0 70%;
+  padding: 40px;
+  background-color: #eef;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.main h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.main p, .main ul {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.main button {
+  padding: 10px 20px;
+  background-color: #0078D4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.main button:hover {
+  background-color: #005fa3;
+}
+
+#kvkk-answer,
+#kvkk-consent,
+#kvkk-info,
+#gdpr-consent,
+#risk-input {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  font-family: "Calibri Light", "Calibri", "Segoe UI", sans-serif;
+}
+</style>
+
+<script>
+// Modül Yönlendirme
+function loadModule(module) {
+  if (module === "intro") return renderIntro();
+  if (module === "kvkk-consent") return renderKvkkConsent();
+  if (module === "kvkk-info") return renderKvkkInfo();
+  if (module === "gdpr-consent") return renderGdprConsent();
+  if (module === "kvkk-qa") return renderKvkkQA();
+  if (module === "visitor-info") return renderVisitorInfo();
+  if (module === "kvkk-risk") return renderKvkkRisk();
+}
+
+// Tanıtım Modülü
+function renderIntro() {
+  const content = document.getElementById("content-area");
+  content.innerHTML = `
+    <h1>legalbear nedir?</h1>
+    <p><strong>legalbear</strong>, kişisel veri koruma süreçlerini kolaylaştırmak için geliştirilmiş açık kaynaklı bir hukuk asistanıdır.</p>
+    <ul>
+      <li>KVKK ve GDPR kapsamında veri analizi yapar</li>
+      <li>Şablon metinler üretir</li>
+      <li>Yasal soruları yanıtlar</li>
+      <li>Akademik ve açık kaynak toplulukları için tasarlanmıştır</li>
+      <li>Hedefi: veri koruma süreçlerini herkes için erişilebilir ve anlaşılır hale getirmek</li>
+    </ul>
+    <p>legalbear, teknik kullanıcılar kadar hukukçular ve veri sorumluları için de sade bir arayüz sunar. Modüler yapısı sayesinde farklı senaryolara uyarlanabilir. Açık kaynak olması, topluluk katkılarını teşvik eder ve sürekli gelişmesini sağlar.</p>
+    <p>İster KVKK bilgilendirme metni üretmek isteyin, ister GDPR açık rıza metni hazırlayın; legalbear sizin için hızlı, doğru ve yasal uyumlu içerikler sunar.</p>
+  `;
+}
+
+// KVKK Soru-Cevap Modülü
+function renderKvkkQA() {
+  const content = document.getElementById("content-area");
+  content.innerHTML = `
+    <h1>KVKK Arama Motoru</h1>
+    <p>KVKK hakkında merak ettiğiniz soruları buradan sorabilirsiniz.</p>
+    <input type="text" id="kvkk-question" placeholder="Örn: veri sorumlusu nedir, açık rıza nedir?" style="width:100%; padding:10px; margin-top:10px;">
+    <button id="kvkk-ask-button" onclick="askKvkk()" style="margin-top:10px;">Sor</button>
+    <div id="kvkk-answer" style="margin-top:20px; font-weight:bold; display:none;"></div>
+  `;
+
+  // Enter tuşuyla tetikleme
+  const inputEl = document.getElementById("kvkk-question");
+  const buttonEl = document.getElementById("kvkk-ask-button");
+
+  if (inputEl && buttonEl) {
+    inputEl.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        buttonEl.click();
+      }
+    });
+  }
+}
+
+function askKvkk() {
+  const question = document.getElementById("kvkk-question").value.trim();
+  const answerBox = document.getElementById("kvkk-answer");
+
+  if (!question) {
+    answerBox.style.display = "block";
+    answerBox.innerText = "Lütfen bir soru girin.";
+    return;
+  }
+
+  answerBox.style.display = "block";
+  answerBox.innerText = "Yanıt aranıyor...";
+
+  fetch("/kvkk-qa", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question })
+  })
+    .then(res => res.json())
+    .then(data => {
+      answerBox.innerText = data.answer || "Yanıt bulunamadı.";
+    })
+    .catch(err => {
+      answerBox.innerText = "Bir hata oluştu: " + err.message;
+    });
+}
+
+// Risk Analiz Modülü
+function analyzeText() {
+    // HTML'deki input alanının ID'sini kullanıyoruz. renderKvkkRisk'e göre bu 'risk-input'.
+    const inputEl = document.getElementById("risk-input");
+    const resultEl = document.getElementById("risk-result");
+    
+    if (!inputEl) {
+        alert("Metin alanı bulunamadı. Lütfen sayfayı yenileyin.");
+        return;
+    }
+
+    const text = inputEl.value;
+    resultEl.innerText = "Analiz ediliyor, lütfen bekleyiniz...";
+
+    fetch("/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+    })
+    .then(res => {
+        if (!res.ok) throw new Error(`HTTP Hata: ${res.status} - Sunucu yanıtı başarısız.`);
+        return res.json();
+    })
+    .then(data => {
+        // Yeni API çıktısının yapısını burada yakalıyoruz:
+        // data = { findings: [{}], risk_score: N, risk_level: "...", risks_detected: [{}] }
+        const { findings, risk_score, risk_level, risks_detected } = data;
+
+        let resultText = `
+### ⚡️ KVKK Risk Analizi Sonucu ⚡️
+
+✅ Risk Seviyesi: ${risk_level}
+🔢 Risk Skoru: ${risk_score} / 25 (Puanlama: Olasılık x Etki)
+${'-'.repeat(50)}
+`;
+        
+        // --- 1. Tespit Edilen Veriler (Findings) ---
+        resultText += `\n🔍 Tespit Edilen Kişisel Veriler (${findings.length} adet):\n`;
+        if (findings.length) {
+            resultText += findings.map(f => {
+                // Yeni findings yapısı: { type: "...", match: "...", etki: N }
+                return `  - [Etki: ${f.etki}] ${f.type}: "${f.match}"`;
+            }).join("\n");
+        } else {
+            resultText += "  - Metin içerisinde kişisel veri tespit edilmedi.";
+        }
+
+        // --- 2. Tespit Edilen Riskler ---
+        resultText += `\n\n🚨 Tespit Edilen Hukuki Riskler (${risks_detected.length} adet):\n`;
+        if (risks_detected.length) {
+            resultText += risks_detected.map(r => {
+                // Yeni risks_detected yapısı: { risk_type: "...", suggestion: "...", olasılık: N }
+                return `  - [Olasılık: ${r.olasılık}] **${r.risk_type}**\n    Öneri: ${r.suggestion}`;
+            }).join("\n\n");
+        } else {
+            resultText += "  - Açık rıza veya aydınlatma eksikliği gibi hukuki risk ifadesi bulunamadı.";
+        }
+
+        resultEl.innerText = resultText;
+    })
+    .catch(err => {
+        resultEl.innerText = `Hata oluştu: ${err.message}`;
+        console.error("Analiz hatası:", err);
+    });
+}
+
+// Modülü ana sayfada render eden fonksiyon
+function renderKvkkRisk() {
+    const content = document.getElementById("content-area");
+    content.innerHTML = `
+        <h1>KVKK Risk Analizi</h1>
+        <p>
+        Bu modül, KVKK kapsamında kişisel veri içeren metinleri analiz ederek olası riskleri tespit etmenizi sağlar. Metin, bir sözleşme, bilgilendirme metni, açık rıza formu, e-posta içeriği veya herhangi bir veri işleme açıklaması olabilir.
+        </p>
+        <textarea id="risk-input" placeholder="Analiz etmek istediğiniz metni buraya girin..." style="width:90%; height:150px; margin-top:10px;"></textarea>
+        <button id="analyze-button" onclick="analyzeText()" style="margin-top:10px;">Analiz Et</button>
+        
+        <hr style="margin-top: 20px;">
+        
+        <h2>Analiz Raporu</h2>
+        <pre id="risk-result" style="margin-top:10px; padding: 15px; background-color: #f7f7f7; border: 1px solid #ddd; white-space:pre-wrap; text-align: left;"></pre>
+    `;
+
+    // Sadece bu modülün aktif olduğu yerde klavye kısayolunu ekleyelim
+    setTimeout(() => {
+        const inputEl = document.getElementById("risk-input");
+        const buttonEl = document.getElementById("analyze-button");
+
+        if (inputEl && buttonEl) {
+            // "Enter" tuşuna basıldığında (Shift basılı değilse) analizi başlat
+            inputEl.addEventListener("keydown", function(event) {
+                if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault(); 
+                    buttonEl.click(); 
+                }
+            });
+        }
+    }, 0); 
+    // Diğer global event listener'lar (document.getElementById("submit-botton").click(); kısımları) 
+    // bu fonksiyon dışında temizlenmelidir.
+}
+
+// Ziyaretçi Aydınlatma Modülü (Gelişmiş)
+function renderVisitorInfo() {
+  const content = document.getElementById("content-area");
+  content.innerHTML = `
+    <h1>Ziyaretçi Aydınlatma Metni Oluştur</h1>
+    <p>KVKK m.10 ve ilgili Tebliğ uyarınca ziyaretçilerin kişisel verilerinin işlenmesine dair bilgilendirme metni oluşturmak için aşağıdaki alanları doldurun.</p>
+
+    <input type="text" id="company-name" placeholder="Şirket Adı" style="width:90%; padding:10px; margin-top:10px;"><br>
+    <input type="text" id="contact-info" placeholder="İletişim Bilgisi (e-posta, telefon)" style="width:90%; padding:10px; margin-top:10px;"><br>
+    <input type="text" id="purpose" placeholder="İşleme Amacı (örn: bina güvenliği)" style="width:90%; padding:10px; margin-top:10px;"><br>
+    <input type="text" id="method" placeholder="İşleme Yöntemi (örn: kamera kaydı, kayıt defteri)" style="width:90%; padding:10px; margin-top:10px;"><br>
+    <input type="text" id="legal-basis" placeholder="Hukuki Sebep (örn: KVKK m.5/2-ç)" style="width:90%; padding:10px; margin-top:10px;"><br>
+    <input type="text" id="transfer-info" placeholder="Aktarım Bilgisi (örn: kamu kurumları)" style="width:90%; padding:10px; margin-top:10px;"><br>
+
+    <button id="visitor-info-button" onclick="generateVisitorInfo()" style="margin-top:10px;">Metni Oluştur</button>
+    <div id="visitor-info-result" style="margin-top:20px; white-space:pre-wrap;"></div>
+  `;
+
+  // Enter tuşuyla tetikleme
+  const inputEls = document.querySelectorAll("#company-name, #contact-info, #purpose, #method, #legal-basis, #transfer-info");
+  const buttonEl = document.getElementById("visitor-info-button");
+
+  inputEls.forEach(input => {
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        buttonEl.click();
+      }
+    });
+  });
+}
+
+function generateVisitorInfo() {
+  const company = document.getElementById("company-name").value.trim();
+  const contact = document.getElementById("contact-info").value.trim();
+  const purpose = document.getElementById("purpose").value.trim();
+  const method = document.getElementById("method").value.trim();
+  const legal_basis = document.getElementById("legal-basis").value.trim();
+  const transfer = document.getElementById("transfer-info").value.trim();
+  const resultBox = document.getElementById("visitor-info-result");
+
+  if (!company || !contact) {
+    resultBox.innerText = "Lütfen şirket adı ve iletişim bilgilerini girin.";
+    return;
+  }
+
+  resultBox.innerText = "Metin oluşturuluyor...";
+
+  fetch("/generate-visitor-text", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      company,
+      contact,
+      purpose,
+      method,
+      legal_basis,
+      transfer
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      resultBox.innerText = data.text || "Şablon alınamadı.";
+    })
+    .catch(err => {
+      resultBox.innerText = "Bir hata oluştu: " + err.message;
+    });
+}
+
+// KVKK Açık Rıza Modülü
+function renderKvkkConsent() {
+  const content = document.getElementById("content-area");
+  content.innerHTML = `
+    <h1>KVKK Açık Rıza</h1>
+    <p>Adınızı ve şirket adını girerek KVKK açık rıza metni oluşturabilirsiniz.</p>
+    <input type="text" id="user-name" placeholder="Adınız" style="width:90%; padding:10px; margin-top:10px;">
+    <input type="text" id="company-name" placeholder="Şirket Adı" style="width:90%; padding:10px; margin-top:10px;">
+    <button id="kvkk-consent-button" onclick="generateKvkkConsent()" style="margin-top:10px;">Metni Oluştur</button>
+    <div id="kvkk-consent-result" style="margin-top:20px; white-space:pre-wrap;"></div>
+  `;
+
+  // Enter tuşuyla tetikleme: her iki input alanında
+  ["user-name", "company-name"].forEach(id => {
+    const inputEl = document.getElementById(id);
+    const buttonEl = document.getElementById("kvkk-consent-button");
+
+    if (inputEl && buttonEl) {
+      inputEl.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+          buttonEl.click();
+        }
+      });
+    }
+  });
+}
+
+function generateKvkkConsent() {
+  const name = document.getElementById("user-name").value.trim();
+  const company = document.getElementById("company-name").value.trim();
+  const resultBox = document.getElementById("kvkk-consent-result");
+
+  if (!name || !company) {
+    resultBox.innerText = "Lütfen adınızı ve şirket adını girin.";
+    return;
+  }
+
+  resultBox.innerText = "Metin oluşturuluyor...";
+
+  fetch("/template/kvkk-consent", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, company })
+  })
+    .then(res => res.json())
+    .then(data => {
+      resultBox.innerText = data.template || "Şablon alınamadı.";
+    })
+    .catch(err => {
+      resultBox.innerText = "Bir hata oluştu: " + err.message;
+    });
+}
+
+// KVKK Bilgilendirme Modülü
+function renderKvkkInfo() {
+  const content = document.getElementById("content-area");
+  content.innerHTML = `
+    <h1>KVKK Bilgilendirme Metni</h1>
+    <p>Şirket adını girerek KVKK bilgilendirme metni oluşturabilirsiniz.</p>
+    <input type="text" id="company-name" placeholder="Şirket Adı" style="width:90%; padding:10px; margin-top:10px;">
+    <input type="text" id="purpose" placeholder="Veri işleme amacı (örn: güvenlik, pazarlama)" style="width:90%; padding:10px; margin-top:10px;">
+    <button id="kvkk-info-button" onclick="generateKvkkInfo()" style="margin-top:10px;">Metni Oluştur</button>
+    <div id="kvkk-info-result" style="margin-top:20px; white-space:pre-wrap;"></div>
+  `;
+
+  // Enter tuşuyla tetikleme: her iki input alanında
+  ["company-name", "purpose"].forEach(id => {
+    const inputEl = document.getElementById(id);
+    const buttonEl = document.getElementById("kvkk-info-button");
+
+    if (inputEl && buttonEl) {
+      inputEl.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+          buttonEl.click();
+        }
+      });
+    }
+  });
+}
+
+function generateKvkkInfo() {
+  const company = document.getElementById("company-name").value.trim();
+  const purpose = document.getElementById("purpose").value.trim();
+  const resultBox = document.getElementById("kvkk-info-result");
+
+  if (!company || !purpose) {
+    resultBox.innerText = "Lütfen şirket adını ve veri işleme amacını girin.";
+    return;
+  }
+
+  resultBox.innerText = "Metin oluşturuluyor...";
+
+  fetch("/template/kvkk-info", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ company, purpose })
+  })
+    .then(res => res.json())
+    .then(data => {
+      resultBox.innerText = data.template || "Şablon alınamadı.";
+    })
+    .catch(err => {
+      resultBox.innerText = "Bir hata oluştu: " + err.message;
+    });
+}
+
+// GDPR Açık Rıza Modülü
+function renderGdprConsent() {
+  const content = document.getElementById("content-area");
+  content.innerHTML = `
+    <h1>GDPR Açık Rıza Metni</h1>
+    <p>Adınızı ve şirket adını girerek GDPR açık rıza metni oluşturabilirsiniz.</p>
+    <input type="text" id="user-name" placeholder="Adınız" style="width:90%; padding:10px; margin-top:10px;">
+    <input type="text" id="company-name" placeholder="Şirket Adı" style="width:90%; padding:10px; margin-top:10px;">
+    <button id="gdpr-consent-button" onclick="generateGdprConsent()" style="margin-top:10px;">Metni Oluştur</button>
+    <div id="gdpr-consent-result" style="margin-top:20px; white-space:pre-wrap;"></div>
+  `;
+
+  // Enter tuşuyla tetikleme: her iki input alanında
+  ["user-name", "company-name"].forEach(id => {
+    const inputEl = document.getElementById(id);
+    const buttonEl = document.getElementById("gdpr-consent-button");
+
+    if (inputEl && buttonEl) {
+      inputEl.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+          buttonEl.click();
+        }
+      });
+    }
+  });
+}
+
+function generateGdprConsent() {
+  const name = document.getElementById("user-name").value.trim();
+  const company = document.getElementById("company-name").value.trim();
+  const resultBox = document.getElementById("gdpr-consent-result");
+
+  if (!name || !company) {
+    resultBox.innerText = "Lütfen adınızı ve şirket adını girin.";
+    return;
+  }
+
+  resultBox.innerText = "Metin oluşturuluyor...";
+
+  fetch("/template/gdpr-consent", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, company })
+  })
+    .then(res => res.json())
+    .then(data => {
+      resultBox.innerText = data.template || "Şablon alınamadı.";
+    })
+    .catch(err => {
+      resultBox.innerText = "Bir hata oluştu: " + err.message;
+    });
+}
+
+</script>
+</body>
+</html>

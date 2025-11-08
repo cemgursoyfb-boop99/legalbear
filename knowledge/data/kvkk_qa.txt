@@ -1,0 +1,37 @@
+Açık Rıza: Kişinin özgür iradesiyle, belirli bir konuya ilişkin ve bilgilendirmeye dayalı olarak verdiği onaydır.
+
+Veri Sorumlusu: Kişisel verilerin işlenme amaçlarını ve vasıtalarını belirleyen kişidir.
+
+Meşru Amaç: Amacın meşru olması; veri sorumlusunun işlediği verilerin, yaptığı işle bağlantılı olması anlamına gelir.
+
+Kişisel Veri: Kimliği belirli veya belirlenebilir gerçek kişiye ilişkin her türlü bilgidir.
+
+İlgili Kişi: Kişisel verisi işlenen bir gerçek kişidir.
+
+Özel Nitelikli Kişisel Veri: Irk, etnik köken, siyasi düşünce, din, mezhep, inanç, kılık kıyafet, dernek/vakıf/sendika üyeliği, sağlık bilgisi, cinsel hayat, ceza mahkûmiyeti, biyometrik ve genetik veriler gibi, öğrenilmesi hâlinde ilgili kişi hakkında ayrımcılık yapılmasına veya mağduriyete neden olabilecek nitelikteki verilerdir.
+
+Veri İşleyen: Veri sorumlusu tarafından verilen yetkiye dayanarak kişisel verilerin işlenmesi faaliyetinde bulunan gerçek veya tüzel kişidir.
+
+Kişisel Verilerin İşlenmesi: Kişisel verilerin tamamen ya da kısmen otomatik yöntemlerle veya herhangi bir veri kayıt sisteminin parçası olarak otomatik olmayan yollarla; elde edilmesi, kaydedilmesi, depolanması, muhafaza edilmesi, değiştirilmesi, yeniden düzenlenmesi, açıklanması, aktarılması, devralınması, elde edilebilir hâle getirilmesi, sınıflandırılması veya kullanılmasının engellenmesi gibi işlemleri ifade eder.
+
+Veri Kayıt Sistemi: Kişisel verilerin belirli kriterlere göre yapılandırılarak işlendiği sistemdir. Elektronik ya da fiziki olabilir.
+
+Aydınlatma Yükümlülüğü: Veri sorumlusunun, kişisel verilerin elde edilmesi sırasında ilgili kişiye veri işleme amacı, hukuki dayanak, aktarım bilgisi ve hakları hakkında bilgi verme yükümlülüğüdür.
+
+İmha: Kişisel verilerin silinmesi, yok edilmesi veya anonim hale getirilmesi işlemlerinin genel adıdır.
+
+Silme: Kişisel verilerin ilgili kullanıcılar için erişilemez ve tekrar kullanılamaz hale getirilmesidir.
+
+Yok Etme: Kişisel verilerin hiç kimse tarafından erişilemeyecek, geri getirilemeyecek biçimde tamamen ortadan kaldırılmasıdır.
+
+Aktarım: Kişisel verilerin üçüncü kişilere veya kurumlara gönderilmesi, paylaşılması veya erişilebilir hale getirilmesidir. Aktarım yurt içinde ya da yurt dışında olabilir.
+
+Anonim Hale Getirme: Kişisel verilerin, başka verilerle eşleştirilse bile kimliği belirli veya belirlenebilir bir gerçek kişiyle ilişkilendirilemeyecek hale getirilmesidir. Bu durumda veriler artık kişisel veri sayılmaz.
+
+Veri Güvenliği: Verilerin yetkisiz erişim, değişiklik, kayıp veya ifşa edilmesine karşı korunması amacıyla alınan teknik ve idari tedbirlerin bütünüdür.
+
+Aydınlatma Metni: Kişisel verilerin işlenmesi sürecinde, ilgili kişiye bilgi vermek amacıyla hazırlanan metindir. Bu metin açık, anlaşılır ve kolay erişilebilir olmalıdır.
+
+Veri Sorumluları Sicili (VERBİS): Kişisel veri işleyen veri sorumlularının, işleme faaliyetlerini beyan ettikleri çevrim içi kayıt sistemidir. KVKK uyarınca belirli nitelikteki veri sorumlularının bu sisteme kayıt olması zorunludur.
+
+İlgili Kişinin Hakları: KVKK’nın 11. maddesi uyarınca, kişisel verisi işlenen bireyler; verilerinin işlenip işlenmediğini öğrenme, düzeltilmesini veya silinmesini isteme, aktarıldığı kişileri öğrenme ve işleme faaliyetlerine itiraz etme gibi haklara sahiptir.
